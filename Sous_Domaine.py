@@ -40,9 +40,5 @@ with open("Sous_Domaines_trouvés.txt","a") as output_file:
                 else:
                     print(f"Reponse inatendu pour le sous domaine {test_SousDomaines}, code {reponse}")
                     output_file.write(f"Reponse inatendu pour le sous domaine {test_SousDomaines}, code {reponse} \n")
-<<<<<<< HEAD
-        print("Scan terminé ! ")
-=======
         print("Scan terminé ! \n")
->>>>>>> 35c687c (Scanner de sous domaine)
         output_file.write("Scan termine !")
