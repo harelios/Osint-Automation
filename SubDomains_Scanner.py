@@ -1,11 +1,10 @@
 import requests
-import socket
 import datetime 
 import time
 
 Sous_Domaine = input("Entrer un nom de domaine : \n")
 longueur_mots = int(input("Entrer la plage de mots que vous souhaitez tester (max 114441) : \n"))
-with open("Sous_Domaines_trouvés.txt","a") as output_file:
+with open(f"SubDomains_{Sous_Domaine}_find.txt","w") as output_file:
     with open("Subdomains_wordlist.txt","r") as file:
         lignes = file.readlines()[:longueur_mots]
         date = datetime.datetime.now()
