@@ -12,9 +12,9 @@ def ip_lookup(ip):
         return 
     
     result = {"IP" : data.get("ip", "N/A"), "Continent" : data.get("continent_name", "N/A"),"Country" : data.get("country_name", "N/A"),
-              "Region" :data.get("Region_name","N/A"), "City" : data.get("city", "N/A"), "Zip Code": data.get("zip", "N/A"),
-              "Latitude": data.get("latitude", "N/A"), "Longitude" : data.get("longitude", "N/A"),"Provider (ISP)" : data.get("connection","N/A"),
-              "Organization" : data.get("organisation", "N/A"), "Connexion's Type" : data.get("type", "N/A"), "location" : data.get("time_zone", "N/A")}
+              "Region" :data.get("region_name","N/A"), "City" : data.get("city", "N/A"), "Zip Code": data.get("zip", "N/A"),
+              "Latitude": data.get("latitude", "N/A"), "Longitude" : data.get("longitude", "N/A"),
+              "Connexion's Type" : data.get("type", "N/A")}
     print("Resultat IP Lookup : \n")
     for key,value in result.items():
         print(f"{key} : {value}")
