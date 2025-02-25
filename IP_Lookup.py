@@ -1,9 +1,9 @@
 import requests
 import json
 
-Api_Keys = "847ca7c5b64d1154d51c0db17ddcf2a5"
 ip = input("Enter an ip adress for the IP Lookup : \n")
 def ip_lookup(ip):
+    Api_Keys = "847ca7c5b64d1154d51c0db17ddcf2a5"
     url = f"http://api.ipstack.com/{ip}?access_key={Api_Keys}"
     response = requests.get(url)
     data = response.json()
