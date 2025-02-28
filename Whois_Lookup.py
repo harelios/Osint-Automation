@@ -2,7 +2,6 @@ import whois
 import datetime
 import json
 
-domaine = input("Enter a domain name for the whois lookup (example.com) : \n")
 
 
 def format_date(date_value):
@@ -12,10 +11,13 @@ def format_date(date_value):
     return date_value.strftime("%Y-%m-%d %H:%M:%S") if isinstance(date_value, datetime.datetime) else str(date_value)
 
 
-def get_whois_info(domaine):
-    whois_request = whois.whois(domaine)
+def get_whois_info(domain=None):
+    if not domain:
+        domain = input("Enter a domain name for the whois lookup (example.com) : \n")
+
+    whois_request = whois.whois(domain)
     date = datetime.datetime.now()
-    with open(f"Whois_{domaine}.txt", "w" ) as file:
+    with open(f"Whois_{domain}.txt", "w" ) as file:
         try:
             print("----------Whois information----------")
             print(f"Domaine name : {whois_request.domain_name} \n")
@@ -41,5 +43,6 @@ def save_as_json(domaine):
         json.dump(data,file, indent=5)
     print(f"Données bien écrites dans Whois_{domaine}.json")
 
-get_whois_info(domaine)
-save_as_json(domaine)
+if __name__ =="__main__":
+    get_whois_info()
+

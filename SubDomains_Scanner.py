@@ -3,17 +3,20 @@ import datetime
 import time
 
 
-Sous_Domaine = input("Entrer un nom de domaine : \n")
 
-def Subdomains_Scanner(SubDomains):
-    longueur_mots = int(input("Entrer la plage de mots que vous souhaitez tester (max 114441) : \n"))
-    with open(f"SubDomains_{Sous_Domaine}_find.txt","w") as output_file:
+def Subdomains_Scanner(SubDomains=None,Words_Length=None):
+    if not SubDomains:
+        SubDomains = input("Entrer un nom de domaine : \n")
+    
+    if not Words_Length: 
+        Words_Length = int(input("Entrer la plage de mots que vous souhaitez tester (max 114441) : \n"))
+    with open(f"SubDomains_{SubDomains}_find.txt","w") as output_file:
         with open("Subdomains_wordlist.txt","r") as file:
-            lignes = file.readlines()[:longueur_mots]
+            lignes = file.readlines()[:Words_Length]
             date = datetime.datetime.now()
             output_file.write(date.strftime("%d-%m-%Y %H:%M:%S") + "\n")
             for line in lignes:
-                    test_SousDomaines = line.strip() +"."+ Sous_Domaine
+                    test_SousDomaines = line.strip() +"."+ SubDomains
                     url = f"https://{test_SousDomaines}"
                     try:
                         reponse = requests.get(url, timeout=5)
@@ -46,3 +49,6 @@ def Subdomains_Scanner(SubDomains):
                         output_file.write(f"Reponse inatendu pour le sous domaine {test_SousDomaines}, code {reponse} \n")
             print("Scan terminé ! \n")
             output_file.write("Scan termine !\n")
+            
+if __name__ == "__main__":
+    Subdomains_Scanner()

@@ -10,18 +10,22 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 
-def email_finder(url):
+
+
+def email_finder(Domain=None):
     #webdriver
     options = Options()
     options.add_argument("--headless") #mode headless (to not display the navigators each time we run the program
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--windows-size=19201080")
+    
+    if not Domain:
+        Domain = input("Enter a domain's name to scan (exemple : example.com) : \n")
 
     service = Service(r"C:/Users/Proprietaire/chromedriver-win64/chromedriver-win64/chromedriver.exe") #Path to the webdriver
     driver = webdriver.Chrome(service=service, options=options) #Webdriver
 
-    Domain = input("Enter a domain's name to scan (exemple : example.com) : \n")
     url = f"https://www.{Domain}"
     email_list = []
     regex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"   
@@ -63,5 +67,5 @@ def email_finder(url):
     driver.quit()    
     return f"Email(s) found : {filtered_email}"
     
-
-
+if __name__ == "__main__":
+    email_finder()
