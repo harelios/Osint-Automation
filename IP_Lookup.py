@@ -1,8 +1,11 @@
 import requests
 import json
 
+
+
 def ip_lookup(ip=None):
     Api_Keys = "847ca7c5b64d1154d51c0db17ddcf2a5"
+    liste = []
     if not ip:
         ip = input("Enter an ip adress for the IP Lookup : \n")
 
@@ -18,11 +21,14 @@ def ip_lookup(ip=None):
               "Latitude": data.get("latitude", "N/A"), "Longitude" : data.get("longitude", "N/A"),
               "Connexion's Type" : data.get("type", "N/A")}
     print("Resultat IP Lookup : \n")
-    for key,value in result.items():
-        print(f"{key} : {value}")
-    
     with open(f"IP_Lookup_{ip}.json", "w") as file:
         json.dump(result,file,indent=5)
+        
+    for key,value in result.items():
+        ligne = f"{key} : {value}"
+        liste.append(ligne)
+    return "\n".join(liste)
+
 
 if __name__ == "__main__":
     ip_lookup()
