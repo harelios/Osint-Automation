@@ -34,7 +34,9 @@ def ip_lookup_main():
     if not ip:
         text_area.insert(END,"Please, enter an appropriate IP adress. \n")
         return
-    ip_lookup(ip)
+    result = ip_lookup(ip)
+    text_area.insert(END, result + "\n")
+
 
 def Subdomains_Scanner_main():
     Subdomain = simpledialog.askstring("Subdomain input","Enter a domain's name to scan : ")
@@ -45,24 +47,26 @@ def Subdomains_Scanner_main():
     if not Words_Length:
         text_area.insert(END,"Please enter a correct value : ")
         return
-    Subdomains_Scanner(Subdomain)
+    for result in Subdomains_Scanner(Subdomain,Words_Length):
+        text_area.insert(END, result + "\n")
+        text_area.update_idletasks()
     
 def Whois_Lookup_main():
     Domain = simpledialog.askstring("Domain input","Enter a domain's name : ")
     if not Domain:
         text_area.insert(END,"Please enter an appropriate domain's name. \n")
         return
-    get_whois_info(Domain)
+    result = get_whois_info(Domain)
+    text_area.insert(END,result)
 
 def email_finder_scan():
     Domain = simpledialog.askstring("Domain input","Enter a domain's name : ")
     if not Domain:
         text_area.insert(END,"Enter a valid domain name. \n ")
         return
-    email_finder(Domain)
-    
-    #faire le bouton pour cette fonction
-    
+    result = email_finder(Domain)
+    text_area.insert(END, result + "\n")
+        
 
     
 Button_IP = ttk.Button(root,text="IP Lookup",command=ip_lookup_main, style="TButton")

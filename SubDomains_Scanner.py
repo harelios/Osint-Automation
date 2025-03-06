@@ -29,26 +29,34 @@ def Subdomains_Scanner(SubDomains=None,Words_Length=None):
                         except requests.exceptions.ConnectionError:
                             continue
                         except requests.exceptions.Timeout:
-                            print(f"Timeout pour le sous domaine {test_SousDomaines}")
+                            result = f"Timeout pour le sous domaine {test_SousDomaines}"
+                            yield result
                             continue
                     except requests.Timeout:    
-                        print(f"Timeout pour le sous domaine {test_SousDomaines}")
+                        result =  f"Timeout pour le sous domaine {test_SousDomaines}"
+                        yield result
                     if reponse.status_code == 200:
-                        print(f"Sous Domaine trouvé : {test_SousDomaines}")
+                        result = f"Sous Domaine trouvé : {test_SousDomaines}"
+                        yield result
                         output_file.write(f"Sous domaine trouve ! : {test_SousDomaines}\n")
                     elif reponse.status_code in [301,302]:
-                        print(f"Sous Domaine {test_SousDomaines} existant mais redirigé autre part, code {reponse}")
+                        result =  f"Sous Domaine {test_SousDomaines} existant mais redirigé autre part, code {reponse}"
+                        yield result
                         output_file.write(f"Sous domaine {test_SousDomaines} existant mais redirige autre part, code {reponse} \n")
                     elif reponse.status_code in [403,401]:
-                        print(f"Sous domaine {test_SousDomaines} existant mais accès interdit, code {reponse}")
+                        result =  f"Sous domaine {test_SousDomaines} existant mais accès interdit, code {reponse}"
+                        yield result
                         output_file.write(f"Sous domaine {test_SousDomaines} existant mais acces interdit, code {reponse} \n")
                     elif reponse.status_code == 404:
                         continue
                     else:
-                        print(f"Reponse inatendu pour le sous domaine {test_SousDomaines}, code {reponse}")
+                        result =  f"Reponse inatendu pour le sous domaine {test_SousDomaines}, code {reponse}"
+                        yield result
                         output_file.write(f"Reponse inatendu pour le sous domaine {test_SousDomaines}, code {reponse} \n")
-            print("Scan terminé ! \n")
+            result =  "Scan terminé ! \n"            
+            yield result
             output_file.write("Scan termine !\n")
+            
             
 if __name__ == "__main__":
     Subdomains_Scanner()
