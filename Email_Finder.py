@@ -65,7 +65,10 @@ def email_finder(Domain=None):
                 filtered_email.append(i)
     
     driver.quit()    
-    return f"Email(s) found : {filtered_email}"
+    if not filtered_email:
+        return "No email found \n"
+    else:
+        return f"Email(s) found : {filtered_email}"
     
 if __name__ == "__main__":
     email_finder()

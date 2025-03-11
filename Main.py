@@ -57,7 +57,11 @@ def Whois_Lookup_main():
         text_area.insert(END,"Please enter an appropriate domain's name. \n")
         return
     result = get_whois_info(Domain)
-    text_area.insert(END,result)
+    if result is None:
+        text_area.insert(END,"No data provided \n")    
+        return
+    else:
+        text_area.insert(END,"".join(result))
 
 def email_finder_scan():
     Domain = simpledialog.askstring("Domain input","Enter a domain's name : ")
